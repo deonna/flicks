@@ -50,12 +50,21 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
         holder.tvTitle.setText(movie.originalTitle);
         holder.tvOverview.setText(movie.overview);
 
-        Picasso
-                .with(getContext())
-                .load(movie.posterPath)
-                .transform(new RoundedCornersTransformation(10, 10))
-                .into(holder.ivPoster);
+        if (holder.ivPoster != null) {
 
+            Picasso
+                    .with(getContext())
+                    .load(movie.posterPath)
+                    .transform(new RoundedCornersTransformation(10, 10))
+                    .into(holder.ivPoster);
+        } else if (holder.ivBackdrop != null) {
+
+            Picasso
+                    .with(getContext())
+                    .load(movie.backdropPath)
+                    .transform(new RoundedCornersTransformation(10, 10))
+                    .into(holder.ivBackdrop);
+        }
 
 
         return convertView;
@@ -64,7 +73,8 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
 
     public class ViewHolder {
 
-        @BindView(R.id.ivPoster) ImageView ivPoster;
+        @Nullable @BindView(R.id.ivBackdrop) ImageView ivBackdrop;
+        @Nullable @BindView(R.id.ivPoster) ImageView ivPoster;
         @BindView(R.id.tvTitle) TextView tvTitle;
         @BindView(R.id.tvOverview) TextView tvOverview;
 

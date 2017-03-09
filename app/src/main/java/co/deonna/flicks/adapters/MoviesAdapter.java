@@ -21,6 +21,7 @@ import co.deonna.flicks.models.Movie;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 
+
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
     private Context context;
@@ -53,18 +54,20 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         holder.tvOverview.setText(movie.overview);
 
         if (holder.ivPoster != null) {
-            Picasso
-                    .with(context)
-                    .load(movie.posterPath)
-                    .transform(new RoundedCornersTransformation(10, 10))
-                    .into(holder.ivPoster);
+            displayMovieImage(movie.posterPath, holder.ivPoster);
         } else if (holder.ivBackdrop != null) {
-            Picasso
-                    .with(context)
-                    .load(movie.backdropPath)
-                    .transform(new RoundedCornersTransformation(10, 10))
-                    .into(holder.ivBackdrop);
+            displayMovieImage(movie.backdropPath, holder.ivBackdrop);
         }
+    }
+
+    private void displayMovieImage(String path, ImageView ivImage) {
+
+        Picasso
+                .with(context)
+                .load(path)
+                .placeholder(R.drawable.placeholder)
+                .transform(new RoundedCornersTransformation(10, 10))
+                .into(ivImage);
     }
 
     @Override

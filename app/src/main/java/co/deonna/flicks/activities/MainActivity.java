@@ -2,8 +2,9 @@ package co.deonna.flicks.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Movie> movies;
     private MoviesAdapter moviesAdapter;
 
-    @BindView(R.id.lvMovies) ListView lvMovies;
+    @BindView(R.id.rvMovies) RecyclerView rvMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         movies =  new ArrayList<>();
         moviesAdapter = new MoviesAdapter(this, movies);
 
-        lvMovies.setAdapter(moviesAdapter);
+        rvMovies.setAdapter(moviesAdapter);
+        rvMovies.setLayoutManager(new LinearLayoutManager(this));
 
         AsyncHttpClient client = new AsyncHttpClient();
 

@@ -3,10 +3,10 @@ package co.deonna.flicks.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,66 +21,69 @@ import co.deonna.flicks.models.Movie;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 
-public class MoviesAdapter extends ArrayAdapter<Movie> {
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
+
+    private Context context;
+    private List<Movie> movies;
 
     public MoviesAdapter(@NonNull Context context, @NonNull List<Movie>
             movies) {
-        super(context, android.R.layout.simple_list_item_1, movies);
+
+        this.context = context;
+        this.movies = movies;
     }
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        ViewHolder holder;
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
 
-        Movie movie = getItem(position);
+        View movieView = inflater.inflate(R.layout.item_movie, parent, false);
 
-        if (convertView == null) {
+        return new ViewHolder(movieView);
+    }
 
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_movie, null);
-            holder = new ViewHolder(convertView);
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
-            convertView.setTag(holder);
-        } else {
-
-            holder = (ViewHolder) convertView.getTag();
-        }
+        Movie movie = movies.get(position);
 
         holder.tvTitle.setText(movie.originalTitle);
         holder.tvOverview.setText(movie.overview);
 
         if (holder.ivPoster != null) {
-
             Picasso
-                    .with(getContext())
+                    .with(context)
                     .load(movie.posterPath)
                     .transform(new RoundedCornersTransformation(10, 10))
                     .into(holder.ivPoster);
         } else if (holder.ivBackdrop != null) {
-
             Picasso
-                    .with(getContext())
+                    .with(context)
                     .load(movie.backdropPath)
                     .transform(new RoundedCornersTransformation(10, 10))
                     .into(holder.ivBackdrop);
         }
+    }
 
-
-        return convertView;
+    @Override
+    public int getItemCount() {
+        return movies.size();
     }
 
 
-    public class ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         @Nullable @BindView(R.id.ivBackdrop) ImageView ivBackdrop;
         @Nullable @BindView(R.id.ivPoster) ImageView ivPoster;
         @BindView(R.id.tvTitle) TextView tvTitle;
         @BindView(R.id.tvOverview) TextView tvOverview;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View itemView) {
+            super(itemView);
 
-            ButterKnife.bind(this, view);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

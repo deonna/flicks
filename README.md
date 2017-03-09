@@ -33,7 +33,7 @@ The following **bonus** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [x] Added CardView for each movie
 
 ## Video Walkthrough
 

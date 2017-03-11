@@ -88,10 +88,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             default:
                 DefaultViewHolder defaultViewHolder = (DefaultViewHolder) holder;
                 defaultViewHolder.configure(movie);
-                displayMovieImage(movie.posterPath, ((DefaultViewHolder) holder).ivPoster);
+                displayMovieImage(movie.posterPath, ((DefaultViewHolder) holder).ivBackdrop);
                 break;
         }
     }
+
+
 
     private void displayMovieImage(String path, ImageView ivImage) {
 
@@ -111,7 +113,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public static class DefaultViewHolder extends RecyclerView.ViewHolder {
 
-        @Nullable @BindView(R.id.ivPoster) ImageView ivPoster;
+        @Nullable @BindView(R.id.ivBackdrop) ImageView ivBackdrop;
         @BindView(R.id.tvTitle) TextView tvTitle;
         @BindView(R.id.tvOverview) TextView tvOverview;
 

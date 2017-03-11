@@ -17,6 +17,7 @@ public class Movie {
     public final String KEY_POSTER_PATH = "poster_path";
     public final String KEY_ORIGINAL_TITLE = "original_title";
     public final String KEY_OVERVIEW = "overview";
+    public final String KEY_VOTE_AVERAGE = "vote_average";
 
     public final String URL_POSTER = "https://image.tmdb.org/t/p/w342/%s";
 
@@ -24,6 +25,7 @@ public class Movie {
     public String posterPath;
     public String originalTitle;
     public String overview;
+    public double voteAverage;
 
     public Movie(JSONObject results) throws JSONException {
 
@@ -31,6 +33,7 @@ public class Movie {
         posterPath = String.format(URL_POSTER, results.getString(KEY_POSTER_PATH));
         originalTitle = results.getString(KEY_ORIGINAL_TITLE);
         overview = results.getString(KEY_OVERVIEW);
+        voteAverage = results.getDouble(KEY_VOTE_AVERAGE);
     }
 
     public static List<Movie> fromJsonArray(JSONArray results) {

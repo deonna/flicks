@@ -22,10 +22,13 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
+public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private List<Movie> movies;
+
+    private final int DEFAULT = 0;
+    private final int HIGH_RATING = 1;
 
     public MoviesAdapter(@NonNull Context context, @NonNull List<Movie>
             movies) {
@@ -35,28 +38,58 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-
-        View movieView = inflater.inflate(R.layout.item_movie, parent, false);
-
-        return new ViewHolder(movieView);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public int getItemViewType(int position) {
 
         Movie movie = movies.get(position);
 
-        holder.tvTitle.setText(movie.originalTitle);
-        holder.tvOverview.setText(movie.overview);
+        if (movie.voteAverage > 5) {
+            return HIGH_RATING;
+        }
 
-        if (holder.ivPoster != null) {
-            displayMovieImage(movie.posterPath, holder.ivPoster);
-        } else if (holder.ivBackdrop != null) {
-            displayMovieImage(movie.backdropPath, holder.ivBackdrop);
+        return DEFAULT;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        RecyclerView.ViewHolder viewHolder;
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+
+        switch (viewType) {
+
+            case HIGH_RATING:
+                View highRatingView = inflater.inflate(R.layout.item_movie_high_rating, parent, false);
+                viewHolder = new HighRatingViewHolder(highRatingView);
+                break;
+
+            default:
+                View defaultView = inflater.inflate(R.layout.item_movie, parent, false);
+                viewHolder = new DefaultViewHolder(defaultView);
+                break;
+        }
+
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+        Movie movie = movies.get(position);
+
+        switch (holder.getItemViewType()) {
+
+            case HIGH_RATING:
+                HighRatingViewHolder highRatingViewHolder = (HighRatingViewHolder) holder;
+                highRatingViewHolder.configure(movie);
+                displayMovieImage(movie.backdropPath, ((HighRatingViewHolder) holder).ivBackdrop);
+                break;
+
+            default:
+                DefaultViewHolder defaultViewHolder = (DefaultViewHolder) holder;
+                defaultViewHolder.configure(movie);
+                displayMovieImage(movie.posterPath, ((DefaultViewHolder) holder).ivPoster);
+                break;
         }
     }
 
@@ -76,17 +109,42 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class DefaultViewHolder extends RecyclerView.ViewHolder {
 
-        @Nullable @BindView(R.id.ivBackdrop) ImageView ivBackdrop;
         @Nullable @BindView(R.id.ivPoster) ImageView ivPoster;
         @BindView(R.id.tvTitle) TextView tvTitle;
         @BindView(R.id.tvOverview) TextView tvOverview;
 
-        public ViewHolder(View itemView) {
+
+        public DefaultViewHolder(View itemView) {
             super(itemView);
 
             ButterKnife.bind(this, itemView);
+        }
+
+        public void configure(Movie movie) {
+
+            this.tvTitle.setText(movie.originalTitle);
+            this.tvOverview.setText(movie.overview);
+        }
+    }
+
+    public static class HighRatingViewHolder extends RecyclerView.ViewHolder {
+
+        @Nullable @BindView(R.id.ivBackdrop) ImageView ivBackdrop;
+        @BindView(R.id.tvTitle) TextView tvTitle;
+        @BindView(R.id.tvOverview) TextView tvOverview;
+
+        public HighRatingViewHolder(View itemView) {
+            super(itemView);
+
+            ButterKnife.bind(this, itemView);
+        }
+
+        public void configure(Movie movie) {
+
+            this.tvTitle.setText(movie.originalTitle);
+            this.tvOverview.setText(movie.overview);
         }
     }
 }

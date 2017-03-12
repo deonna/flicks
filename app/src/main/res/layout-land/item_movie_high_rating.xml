@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             tools:text="Fifty Shades Darker"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/ivImage"/>
+            android:layout_toEndOf="@+id/ivImage"
+            android:layout_toRightOf="@+id/ivImage"/>
 
         <TextView
             android:id="@+id/tvOverview"
@@ -35,7 +36,8 @@
             android:layout_height="wrap_content"
             tools:text="When a wounded Christian Grey tries to entice a cautious Ana Steele back into his life, she demands a new arrangement before she will give him another chance. As the two begin to build trust and find stability, shadowy figures from Christian’s past start to circle the couple, determined to destroy their hopes for a future together."
             android:layout_below="@+id/tvTitle"
-            android:layout_toEndOf="@+id/ivImage"/>
+            android:layout_toEndOf="@+id/ivImage"
+            android:layout_toRightOf="@+id/ivImage"/>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

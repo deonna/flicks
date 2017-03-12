@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".activities.DetailsActivity">
         </activity>
+        <activity android:name=".activities.PlayTrailerActivity">
+        </activity>
     </application>
 
 </manifest>

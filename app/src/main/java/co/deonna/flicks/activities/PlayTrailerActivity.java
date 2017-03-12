@@ -1,8 +1,10 @@
 package co.deonna.flicks.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -21,10 +23,16 @@ import co.deonna.flicks.R;
 import co.deonna.flicks.models.Movie;
 import cz.msebera.android.httpclient.Header;
 
-public class PlayTrailerActivity extends YouTubeBaseActivity {
+public class PlayTrailerActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
+
+    private static final int RECOVERY_REQUEST = 1;
+    private static final String KEY_API = "AIzaSyBDXU3bVnD4lt8avt9wOkMPUistoY0VykU";
+
+    private String videoId;
 
     @BindView(R.id.ytpvTrailer) YouTubePlayerView ytpvTrailer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,20 +41,36 @@ public class PlayTrailerActivity extends YouTubeBaseActivity {
 
         ButterKnife.bind(this);
 
-        final String videoId = getIntent().getStringExtra(DetailsActivity.VIDEO_ID);
+        videoId = getIntent().getStringExtra(DetailsActivity.VIDEO_ID);
 
-        ytpvTrailer.initialize("AIzaSyBDXU3bVnD4lt8avt9wOkMPUistoY0VykU", new YouTubePlayer.OnInitializedListener() {
 
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+        ytpvTrailer.initialize(KEY_API, this);
+    }
 
-                youTubePlayer.cueVideo(videoId);
-            }
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
 
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+        if(!wasRestored) {
+            youTubePlayer.cueVideo(videoId);
+        }
+    }
 
-            }
-        });
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult failureResult) {
+
+        if (failureResult.isUserRecoverableError()) {
+            failureResult.getErrorDialog(this, RECOVERY_REQUEST).show();
+        } else {
+            String error = String.format("Error! ", failureResult.toString());
+            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RECOVERY_REQUEST) {
+            // Retry initialization if user performed a recovery action
+            ytpvTrailer.initialize(KEY_API, this);
+        }
     }
 }

@@ -15,6 +15,8 @@ public class Movie implements Parcelable {
 
     private static final String TAG = Movie.class.getSimpleName() ;
 
+    public static final String KEY_ID = "id";
+    public static final String KEY_KEY = "key";
     public static final String KEY_BACKDROP_PATH = "backdrop_path";
     public static final String KEY_POSTER_PATH = "poster_path";
     public static final String KEY_ORIGINAL_TITLE = "original_title";
@@ -25,6 +27,8 @@ public class Movie implements Parcelable {
 
     public final String URL_POSTER = "https://image.tmdb.org/t/p/w342/%s";
 
+    public String id;
+    public String videoId;
     public String backdropPath;
     public String posterPath;
     public String originalTitle;
@@ -34,8 +38,12 @@ public class Movie implements Parcelable {
 
     public Movie(JSONObject results) throws JSONException {
 
+        id = results.getString(KEY_ID);
+        videoId = "";
+
         backdropPath = String.format(URL_POSTER, results.getString(KEY_BACKDROP_PATH));
         posterPath = String.format(URL_POSTER, results.getString(KEY_POSTER_PATH));
+
         originalTitle = results.getString(KEY_ORIGINAL_TITLE);
         overview = results.getString(KEY_OVERVIEW);
         voteAverage = results.getDouble(KEY_VOTE_AVERAGE);
@@ -57,6 +65,20 @@ public class Movie implements Parcelable {
         return movies;
     }
 
+    public void setVideoId(JSONArray videos) {
+
+        if (!videos.isNull(0)) {
+
+            try {
+
+                videoId = videos.getJSONObject(0).getString(KEY_KEY);
+            } catch (JSONException e) {
+
+                Log.e(TAG, "Couldn't parse video id.", e);
+            }
+        }
+    }
+
     public int getPopularity() {
 
         return Long.valueOf(Math.round(popularity)).intValue();
@@ -70,6 +92,8 @@ public class Movie implements Parcelable {
 
     protected Movie(Parcel in) {
 
+        id = in.readString();
+        videoId = in.readString();
         backdropPath = in.readString();
         posterPath = in.readString();
         originalTitle = in.readString();
@@ -81,6 +105,8 @@ public class Movie implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
+        dest.writeString(id);
+        dest.writeString(videoId);
         dest.writeString(backdropPath);
         dest.writeString(posterPath);
         dest.writeString(originalTitle);

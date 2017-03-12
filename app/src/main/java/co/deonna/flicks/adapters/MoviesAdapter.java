@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.deonna.flicks.R;
 import co.deonna.flicks.activities.DetailsActivity;
+import co.deonna.flicks.activities.PlayTrailerActivity;
 import co.deonna.flicks.models.Movie;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
@@ -177,12 +178,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
 
         @OnClick(R.id.cvMovie)
-        public void showDetailView() {
+        public void showTrailer() {
 
             Context context = cvMovie.getContext();
 
-            Intent intent = new Intent(context, DetailsActivity.class);
-            intent.putExtra(Movie.KEY_MOVIE, currentMovie);
+            Intent intent = new Intent(context, PlayTrailerActivity.class);
+            intent.putExtra(PlayTrailerActivity.VIDEO_ID, currentMovie.videoId);
 
             context.startActivity(intent);
         }

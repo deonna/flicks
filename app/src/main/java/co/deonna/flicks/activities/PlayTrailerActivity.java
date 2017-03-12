@@ -1,31 +1,22 @@
 package co.deonna.flicks.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.deonna.flicks.R;
-import co.deonna.flicks.models.Movie;
-import cz.msebera.android.httpclient.Header;
 
 public class PlayTrailerActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
 
+    public static final String VIDEO_ID = "video_id";
     private static final int RECOVERY_REQUEST = 1;
     private static final String KEY_API = "AIzaSyBDXU3bVnD4lt8avt9wOkMPUistoY0VykU";
 
@@ -41,7 +32,7 @@ public class PlayTrailerActivity extends YouTubeBaseActivity implements YouTubeP
 
         ButterKnife.bind(this);
 
-        videoId = getIntent().getStringExtra(DetailsActivity.VIDEO_ID);
+        videoId = getIntent().getStringExtra(VIDEO_ID);
 
 
         ytpvTrailer.initialize(KEY_API, this);

@@ -28,6 +28,21 @@
         android:layout_below="@id/tvTitle"
         android:id="@+id/ivImage"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvTitle"
+        android:layout_alignTop="@id/ivImage"
+        android:layout_alignBottom="@id/ivImage"
+        android:layout_alignLeft="@id/ivImage"
+        android:layout_alignStart="@id/ivImage"
+        android:layout_alignRight="@id/ivImage"
+        android:layout_alignEnd="@id/ivImage"
+        android:scaleType="centerInside"
+        android:src="@drawable/play_overlay"
+        android:id="@+id/ivPlayOverlay"/>
+
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

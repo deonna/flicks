@@ -3,18 +3,11 @@ package co.deonna.flicks.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Locale;
 
@@ -23,14 +16,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.deonna.flicks.R;
 import co.deonna.flicks.models.Movie;
-import cz.msebera.android.httpclient.Header;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class DetailsActivity extends AppCompatActivity {
 
     private static final String TAG = DetailsActivity.class.getSimpleName();
-
-    public static final String VIDEO_ID = "video_id";
 
     private static final int MAX_STARS = 10;
     private static final float STEP_SIZE = 0.5f;
@@ -80,7 +70,7 @@ public class DetailsActivity extends AppCompatActivity {
     public void playVideo() {
 
         Intent intent = new Intent(this, PlayTrailerActivity.class);
-        intent.putExtra(VIDEO_ID, movie.videoId);
+        intent.putExtra(PlayTrailerActivity.VIDEO_ID, movie.videoId);
 
         startActivity(intent);
     }

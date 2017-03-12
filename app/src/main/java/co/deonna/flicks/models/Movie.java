@@ -20,6 +20,7 @@ public class Movie implements Parcelable {
     public static final String KEY_ORIGINAL_TITLE = "original_title";
     public static final String KEY_OVERVIEW = "overview";
     public static final String KEY_VOTE_AVERAGE = "vote_average";
+    public static final String KEY_POPULARITY= "popularity";
 
     public final String URL_POSTER = "https://image.tmdb.org/t/p/w342/%s";
 
@@ -28,6 +29,7 @@ public class Movie implements Parcelable {
     public String originalTitle;
     public String overview;
     public double voteAverage;
+    public double popularity;
 
     public Movie(JSONObject results) throws JSONException {
 
@@ -36,6 +38,7 @@ public class Movie implements Parcelable {
         originalTitle = results.getString(KEY_ORIGINAL_TITLE);
         overview = results.getString(KEY_OVERVIEW);
         voteAverage = results.getDouble(KEY_VOTE_AVERAGE);
+        popularity = results.getDouble(KEY_POPULARITY);
     }
 
     public static List<Movie> fromJsonArray(JSONArray results) {
@@ -53,6 +56,11 @@ public class Movie implements Parcelable {
         return movies;
     }
 
+    public long getPopularity() {
+
+        return Math.round(popularity);
+    }
+
     protected Movie(Parcel in) {
 
         backdropPath = in.readString();
@@ -60,6 +68,7 @@ public class Movie implements Parcelable {
         originalTitle = in.readString();
         overview = in.readString();
         voteAverage = in.readDouble();
+        popularity = in.readDouble();
     }
 
     @Override
@@ -70,6 +79,7 @@ public class Movie implements Parcelable {
         dest.writeString(originalTitle);
         dest.writeString(overview);
         dest.writeDouble(voteAverage);
+        dest.writeDouble(popularity);
     }
 
     @Override

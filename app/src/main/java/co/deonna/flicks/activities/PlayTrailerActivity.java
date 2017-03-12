@@ -42,7 +42,7 @@ public class PlayTrailerActivity extends YouTubeBaseActivity implements YouTubeP
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
 
         if(!wasRestored) {
-            youTubePlayer.cueVideo(videoId);
+            youTubePlayer.loadVideo(videoId);
         }
     }
 

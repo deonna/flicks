@@ -20,8 +20,6 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    private static final String TAG = DetailsActivity.class.getSimpleName();
-
     private static final int MAX_STARS = 10;
     private static final float STEP_SIZE = 0.5f;
     private static final int ROUNDED_CORNER_RADIUS = 10;

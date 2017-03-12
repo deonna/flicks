@@ -2,7 +2,7 @@
 
 **Name of your app** shows the latest movies currently playing in theaters. The app utilizes the Movie Database API to display images and basic information about these movies to the user.
 
-Time spent: **6** hours spent in total
+Time spent: **7** hours spent in total
 
 ## User Stories
 
@@ -29,7 +29,7 @@ The following **bonus** features are implemented:
     * [x] Less popular videos rely on the detail page should show ratings and a YouTube preview.
 * [x] Apply the popular [Butterknife annotation library](http://guides.codepath.com/android/Reducing-View-Boilerplate-with-Butterknife) to reduce boilerplate code.
 * [x] Apply rounded corners for the poster or background images using [Picasso transformations](https://guides.codepath.com/android/Displaying-Images-with-the-Picasso-Library#other-transformations)
-* [ ] Replaced android-async-http network client with the popular [OkHttp](http://guides.codepath.com/android/Using-OkHttp) networking libraries.
+* [x] Replaced android-async-http network client with the popular [OkHttp](http://guides.codepath.com/android/Using-OkHttp) networking libraries.
 
 The following **additional** features are implemented:
 
@@ -46,6 +46,13 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+- Using the `RatingBar` was a bit unintuitive. If the width leaves enough space for more than the maximum number of stars, then it will show all those stars, regardless of what number you set for the max (at least, that's what I encountered). Took some StackOverflow perusing before confirming this was the default behavior, and that I had to use `wrap_content` for the behavior that seems like it should be the default.
+- I experienced lots of problems with the build not being able to resolve `AppCompat` and `CardView`. It turned out to be a bug in Gradle, and I ended up having to downgrade.
+- I witnessed first-hand the terrible consequences of forgetting a field in a Parcelable…
+- Adding the `YouTubeAndroidPlayerApi.jar` felt incredibly hack-y and was very time-consuming. It's unfortunate that the Android emulator is so much less performant than Genymotion's. When useful APIs like this are released, relying on a third-party emulator is a big drawback. 
+
+
 
 ## Open-source libraries used
 

@@ -11,11 +11,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import co.deonna.flicks.activities.MainActivity;
 import cz.msebera.android.httpclient.Header;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class Movie implements Parcelable {
 
@@ -68,7 +74,7 @@ public class Movie implements Parcelable {
                 Movie movie = new Movie(results.getJSONObject(i));
                 movies.add(movie);
 
-                movie.makeVideosRequest();
+               movie.makeVideosRequest();
             } catch (JSONException e) {
                 Log.e(TAG, "Couldn't create new movie list.", e);
             }
@@ -93,32 +99,38 @@ public class Movie implements Parcelable {
 
     private void makeVideosRequest() {
 
-        AsyncHttpClient client = new AsyncHttpClient();
+        OkHttpClient client = new OkHttpClient();
 
         String url = String.format(VIDEOS_URL, id);
 
-        client.get(String.format(url), new JsonHttpResponseHandler() {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
 
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onFailure(Call call, IOException e) {
+
+                Log.e(TAG, "Error reading JSON from API " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
 
                 JSONArray movieJsonResults;
 
                 try {
 
-                    movieJsonResults = response.getJSONArray(MainActivity.KEY_RESULTS);
+                    JSONObject responseJson = new JSONObject(response.body().string());
+                    movieJsonResults = responseJson.getJSONArray(MainActivity.KEY_RESULTS);
+
                     setVideoId(movieJsonResults);
                 } catch (JSONException e) {
 
                     e.printStackTrace();
                     Log.e(TAG, "Exception reading JSON from API" + e.toString());
                 }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
-                super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
     }

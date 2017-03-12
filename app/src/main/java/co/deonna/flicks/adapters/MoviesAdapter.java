@@ -145,7 +145,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Context context = cvMovie.getContext();
 
             Intent intent = new Intent(context, DetailsActivity.class);
-            intent.putExtra("movie", (Parcelable) currentMovie);
+            intent.putExtra("movie", currentMovie);
 
             context.startActivity(intent);
         }
@@ -180,7 +180,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Context context = cvMovie.getContext();
 
             Intent intent = new Intent(context, DetailsActivity.class);
-            intent.putExtra("movie", (Parcelable) currentMovie);
+            intent.putExtra("movie", currentMovie);
 
             context.startActivity(intent);
         }

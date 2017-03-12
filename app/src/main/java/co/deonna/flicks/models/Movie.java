@@ -4,12 +4,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import co.deonna.flicks.activities.MainActivity;
+import cz.msebera.android.httpclient.Header;
 
 public class Movie implements Parcelable {
 
@@ -24,6 +30,8 @@ public class Movie implements Parcelable {
     public static final String KEY_VOTE_AVERAGE = "vote_average";
     public static final String KEY_POPULARITY= "popularity";
     public static final String KEY_MOVIE = "movie";
+
+    private static final String VIDEOS_URL  = "https://api.themoviedb.org/3/movie/%s/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
     public final String URL_POSTER = "https://image.tmdb.org/t/p/w342/%s";
 
@@ -56,7 +64,11 @@ public class Movie implements Parcelable {
         for (int i = 0; i < results.length(); i++) {
 
             try {
-                movies.add(new Movie(results.getJSONObject(i)));
+
+                Movie movie = new Movie(results.getJSONObject(i));
+                movies.add(movie);
+
+                movie.makeVideosRequest();
             } catch (JSONException e) {
                 Log.e(TAG, "Couldn't create new movie list.", e);
             }
@@ -77,6 +89,38 @@ public class Movie implements Parcelable {
                 Log.e(TAG, "Couldn't parse video id.", e);
             }
         }
+    }
+
+    private void makeVideosRequest() {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+
+        String url = String.format(VIDEOS_URL, id);
+
+        client.get(String.format(url), new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                JSONArray movieJsonResults;
+
+                try {
+
+                    movieJsonResults = response.getJSONArray(MainActivity.KEY_RESULTS);
+                    setVideoId(movieJsonResults);
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    Log.e(TAG, "Exception reading JSON from API" + e.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+        });
     }
 
     public int getPopularity() {

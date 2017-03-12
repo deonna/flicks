@@ -31,7 +31,6 @@ public class DetailsActivity extends AppCompatActivity {
     private static final String TAG = DetailsActivity.class.getSimpleName();
 
     public static final String VIDEO_ID = "video_id";
-    private static final String VIDEOS_URL  = "https://api.themoviedb.org/3/movie/%s/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
     private static final int MAX_STARS = 10;
     private static final float STEP_SIZE = 0.5f;
@@ -54,7 +53,6 @@ public class DetailsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         initializeComponents();
-        makeVideosRequest();
     }
 
     private void initializeComponents() {
@@ -87,35 +85,5 @@ public class DetailsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void makeVideosRequest() {
 
-        AsyncHttpClient client = new AsyncHttpClient();
-
-        String url = String.format(VIDEOS_URL, movie.id);
-
-        client.get(String.format(url), new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                JSONArray movieJsonResults;
-
-                try {
-
-                    movieJsonResults = response.getJSONArray(MainActivity.KEY_RESULTS);
-                    movie.setVideoId(movieJsonResults);
-                } catch (JSONException e) {
-
-                    e.printStackTrace();
-                    Log.e(TAG, "Exception reading JSON from API" + e.toString());
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
-                super.onFailure(statusCode, headers, responseString, throwable);
-            }
-        });
-    }
 }

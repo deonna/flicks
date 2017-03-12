@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String TAG = MainActivity.class.getSimpleName();
 
-    private String URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
-    private String KEY_RESULTS = "results";
+    private static final String URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+    private static final String KEY_RESULTS = "results";
 
     private List<Movie> movies;
     private MoviesAdapter moviesAdapter;

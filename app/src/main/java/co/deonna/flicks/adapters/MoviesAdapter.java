@@ -33,8 +33,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context context;
     private List<Movie> movies;
 
-    private final int DEFAULT = 0;
-    private final int HIGH_RATING = 1;
+    private static final int DEFAULT = 0;
+    private static final int HIGH_RATING = 1;
+
+    private static final int ROUNDED_CORNER_RADIUS = 10;
 
     public MoviesAdapter(@NonNull Context context, @NonNull List<Movie>
             movies) {
@@ -105,7 +107,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 .with(context)
                 .load(path)
                 .placeholder(R.drawable.placeholder)
-                .transform(new RoundedCornersTransformation(10, 10))
+                .transform(new RoundedCornersTransformation(ROUNDED_CORNER_RADIUS, ROUNDED_CORNER_RADIUS))
                 .into(ivImage);
     }
 
@@ -145,7 +147,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Context context = cvMovie.getContext();
 
             Intent intent = new Intent(context, DetailsActivity.class);
-            intent.putExtra("movie", currentMovie);
+            intent.putExtra(Movie.KEY_MOVIE, currentMovie);
 
             context.startActivity(intent);
         }
@@ -180,7 +182,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Context context = cvMovie.getContext();
 
             Intent intent = new Intent(context, DetailsActivity.class);
-            intent.putExtra("movie", currentMovie);
+            intent.putExtra(Movie.KEY_MOVIE, currentMovie);
 
             context.startActivity(intent);
         }

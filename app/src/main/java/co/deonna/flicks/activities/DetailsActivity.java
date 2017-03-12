@@ -18,6 +18,10 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class DetailsActivity extends AppCompatActivity {
 
+    private static final int MAX_STARS = 10;
+    private static final float STEP_SIZE = 0.5f;
+    private static final int ROUNDED_CORNER_RADIUS = 10;
+
     @BindView(R.id.tvTitle) TextView tvTitle;
     @BindView(R.id.ivImage) ImageView ivImage;
     @BindView(R.id.rbStars) RatingBar rbStars;
@@ -37,7 +41,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void initializeComponents() {
 
-        Movie movie = getIntent().getParcelableExtra("movie");
+        Movie movie = getIntent().getParcelableExtra(Movie.KEY_MOVIE);
 
         tvTitle.setText(movie.originalTitle);
 
@@ -45,8 +49,12 @@ public class DetailsActivity extends AppCompatActivity {
                 .with(this)
                 .load(movie.backdropPath)
                 .placeholder(R.drawable.placeholder)
-                .transform(new RoundedCornersTransformation(10, 10))
+                .transform(new RoundedCornersTransformation(ROUNDED_CORNER_RADIUS, ROUNDED_CORNER_RADIUS))
                 .into(ivImage);
+
+        rbStars.setNumStars(MAX_STARS);
+        rbStars.setStepSize(STEP_SIZE);
+        rbStars.setRating(movie.getRating());
 
         tvPopularityRating.setText(String.format(Locale.US, "%d", movie.getPopularity()));
         tvSummary.setText(movie.overview);

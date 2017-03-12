@@ -21,6 +21,7 @@ public class Movie implements Parcelable {
     public static final String KEY_OVERVIEW = "overview";
     public static final String KEY_VOTE_AVERAGE = "vote_average";
     public static final String KEY_POPULARITY= "popularity";
+    public static final String KEY_MOVIE = "movie";
 
     public final String URL_POSTER = "https://image.tmdb.org/t/p/w342/%s";
 
@@ -56,9 +57,15 @@ public class Movie implements Parcelable {
         return movies;
     }
 
-    public long getPopularity() {
+    public int getPopularity() {
 
-        return Math.round(popularity);
+        return Long.valueOf(Math.round(popularity)).intValue();
+    }
+
+
+    public float getRating() {
+
+        return Double.valueOf(voteAverage).floatValue();
     }
 
     protected Movie(Parcel in) {

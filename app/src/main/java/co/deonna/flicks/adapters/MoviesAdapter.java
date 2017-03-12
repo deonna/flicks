@@ -1,9 +1,13 @@
 package co.deonna.flicks.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +20,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import co.deonna.flicks.R;
+import co.deonna.flicks.activities.DetailsActivity;
 import co.deonna.flicks.models.Movie;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
@@ -111,6 +117,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public static class DefaultViewHolder extends RecyclerView.ViewHolder {
 
+        public Movie currentMovie;
+
+        @BindView(R.id.cvMovie) CardView cvMovie;
         @Nullable @BindView(R.id.ivImage) ImageView ivImage;
         @BindView(R.id.tvTitle) TextView tvTitle;
         @BindView(R.id.tvOverview) TextView tvOverview;
@@ -126,11 +135,27 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             this.tvTitle.setText(movie.originalTitle);
             this.tvOverview.setText(movie.overview);
+
+            currentMovie = movie;
+        }
+
+        @OnClick(R.id.cvMovie)
+        public void showDetailView() {
+
+            Context context = cvMovie.getContext();
+
+            Intent intent = new Intent(context, DetailsActivity.class);
+            intent.putExtra("movie", (Parcelable) currentMovie);
+
+            context.startActivity(intent);
         }
     }
 
     public static class HighRatingViewHolder extends RecyclerView.ViewHolder {
 
+        public Movie currentMovie;
+
+        @BindView(R.id.cvMovie) CardView cvMovie;
         @Nullable @BindView(R.id.ivImage) ImageView ivImage;
         @BindView(R.id.tvTitle) TextView tvTitle;
         @BindView(R.id.tvOverview) TextView tvOverview;
@@ -143,8 +168,21 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         public void configure(Movie movie) {
 
-            this.tvTitle.setText(movie.originalTitle);
-            this.tvOverview.setText(movie.overview);
+            tvTitle.setText(movie.originalTitle);
+            tvOverview.setText(movie.overview);
+
+            currentMovie = movie;
+        }
+
+        @OnClick(R.id.cvMovie)
+        public void showDetailView() {
+
+            Context context = cvMovie.getContext();
+
+            Intent intent = new Intent(context, DetailsActivity.class);
+            intent.putExtra("movie", (Parcelable) currentMovie);
+
+            context.startActivity(intent);
         }
     }
 }

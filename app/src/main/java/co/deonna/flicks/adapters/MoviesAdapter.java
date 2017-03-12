@@ -82,18 +82,16 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             case HIGH_RATING:
                 HighRatingViewHolder highRatingViewHolder = (HighRatingViewHolder) holder;
                 highRatingViewHolder.configure(movie);
-                displayMovieImage(movie.backdropPath, ((HighRatingViewHolder) holder).ivBackdrop);
+                displayMovieImage(movie.backdropPath, ((HighRatingViewHolder) holder).ivImage);
                 break;
 
             default:
                 DefaultViewHolder defaultViewHolder = (DefaultViewHolder) holder;
                 defaultViewHolder.configure(movie);
-                displayMovieImage(movie.posterPath, ((DefaultViewHolder) holder).ivBackdrop);
+                displayMovieImage(movie.posterPath, ((DefaultViewHolder) holder).ivImage);
                 break;
         }
     }
-
-
 
     private void displayMovieImage(String path, ImageView ivImage) {
 
@@ -113,7 +111,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public static class DefaultViewHolder extends RecyclerView.ViewHolder {
 
-        @Nullable @BindView(R.id.ivBackdrop) ImageView ivBackdrop;
+        @Nullable @BindView(R.id.ivImage) ImageView ivImage;
         @BindView(R.id.tvTitle) TextView tvTitle;
         @BindView(R.id.tvOverview) TextView tvOverview;
 
@@ -133,7 +131,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public static class HighRatingViewHolder extends RecyclerView.ViewHolder {
 
-        @Nullable @BindView(R.id.ivBackdrop) ImageView ivBackdrop;
+        @Nullable @BindView(R.id.ivImage) ImageView ivImage;
         @BindView(R.id.tvTitle) TextView tvTitle;
         @BindView(R.id.tvOverview) TextView tvOverview;
 

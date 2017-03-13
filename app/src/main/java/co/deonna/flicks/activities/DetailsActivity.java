@@ -29,6 +29,7 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.tvTitle) TextView tvTitle;
     @BindView(R.id.ivImage) ImageView ivImage;
     @BindView(R.id.rbStars) RatingBar rbStars;
+    @BindView(R.id.tvPopularity) TextView tvPopularity;
     @BindView(R.id.tvPopularityRating) TextView tvPopularityRating;
     @BindView(R.id.tvSummary) TextView tvSummary;
 
@@ -47,6 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         movie = getIntent().getParcelableExtra(Movie.KEY_MOVIE);
 
+        tvTitle.setTypeface(MainActivity.fontBold);
         tvTitle.setText(movie.originalTitle);
 
         Picasso
@@ -60,7 +62,11 @@ public class DetailsActivity extends AppCompatActivity {
         rbStars.setStepSize(STEP_SIZE);
         rbStars.setRating(movie.getRating());
 
+        tvPopularity.setTypeface(MainActivity.fontRegular);
+        tvPopularityRating.setTypeface(MainActivity.fontRegular);
         tvPopularityRating.setText(String.format(Locale.US, "%d", movie.getPopularity()));
+
+        tvSummary.setTypeface(MainActivity.fontLight);
         tvSummary.setText(movie.overview);
     }
 

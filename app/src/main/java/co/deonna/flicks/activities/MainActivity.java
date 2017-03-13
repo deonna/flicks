@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static Typeface fontRegular;
     public static Typeface fontLight;
+    public static Typeface fontBold;
 
     private List<Movie> movies;
     private MoviesAdapter moviesAdapter;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         fontRegular = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
         fontLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
+        fontBold = Typeface.createFromAsset(getAssets(), "OpenSans-Bold.ttf");
 
         movies =  new ArrayList<>();
         moviesAdapter = new MoviesAdapter(this, movies);

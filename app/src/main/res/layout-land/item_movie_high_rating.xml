@@ -12,7 +12,7 @@
     card_view:cardElevation="8dp">
 
     <RelativeLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -57,6 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Fifty Shades Darker"
+                android:textSize="@dimen/title_text_size"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"/>
 
@@ -65,6 +66,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/title_text_size"
                 tools:text="5.0"
                 android:layout_toLeftOf="@+id/ivStar"/>
 
@@ -80,6 +82,8 @@
                 android:id="@+id/tvOverview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="@dimen/summary_text_size"
                 tools:text="When a wounded Christian Grey tries to entice a cautious Ana Steele back into his life, she demands a new arrangement before she will give him another chance. As the two begin to build trust and find stability, shadowy figures from Christian’s past start to circle the couple, determined to destroy their hopes for a future together."
                 android:layout_below="@+id/tvTitle"/>
 
@@ -88,68 +92,3 @@
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
-
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<android.support.v7.widget.CardView-->
-    <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:id="@+id/cvMovie"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--card_view:cardUseCompatPadding="true"-->
-    <!--card_view:cardBackgroundColor="#E6E6E6"-->
-    <!--card_view:cardElevation="8dp">-->
-
-    <!--<RelativeLayout-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/ivImage"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--tools:src="@mipmap/ic_launcher"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:layout_gravity="center_vertical"/>-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/ivPlayOverlay"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@drawable/play_overlay"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:layout_alignTop="@id/ivImage"-->
-            <!--android:layout_alignBottom="@id/ivImage"-->
-            <!--android:layout_alignLeft="@id/ivImage"-->
-            <!--android:layout_alignStart="@id/ivImage"-->
-            <!--android:layout_alignRight="@id/ivImage"-->
-            <!--android:layout_alignEnd="@id/ivImage"-->
-            <!--android:scaleType="centerInside"-->
-            <!--android:layout_gravity="center_vertical"/>-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tvTitle"-->
-            <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--tools:text="Fifty Shades Darker"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_toEndOf="@+id/ivImage"-->
-            <!--android:layout_toRightOf="@+id/ivImage"/>-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tvOverview"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--tools:text="When a wounded Christian Grey tries to entice a cautious Ana Steele back into his life, she demands a new arrangement before she will give him another chance. As the two begin to build trust and find stability, shadowy figures from Christian’s past start to circle the couple, determined to destroy their hopes for a future together."-->
-            <!--android:layout_below="@+id/tvTitle"-->
-            <!--android:layout_toEndOf="@+id/ivImage"-->
-            <!--android:layout_toRightOf="@+id/ivImage"/>-->
-    <!--</RelativeLayout>-->
-
-<!--</android.support.v7.widget.CardView>-->

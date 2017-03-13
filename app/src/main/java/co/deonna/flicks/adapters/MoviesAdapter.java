@@ -2,13 +2,13 @@ package co.deonna.flicks.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.os.Parcelable;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +27,6 @@ import co.deonna.flicks.activities.DetailsActivity;
 import co.deonna.flicks.activities.MainActivity;
 import co.deonna.flicks.activities.PlayTrailerActivity;
 import co.deonna.flicks.models.Movie;
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
-
-
 
 public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -38,8 +35,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private static final int DEFAULT = 0;
     private static final int HIGH_RATING = 1;
-
-    private static final int ROUNDED_CORNER_RADIUS = 10;
 
     public MoviesAdapter(@NonNull Context context, @NonNull List<Movie>
             movies) {
@@ -88,28 +83,36 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         Movie movie = movies.get(position);
 
+        int orientation = context.getResources().getConfiguration().orientation;
+
         switch (holder.getItemViewType()) {
 
             case HIGH_RATING:
                 HighRatingViewHolder highRatingViewHolder = (HighRatingViewHolder) holder;
                 highRatingViewHolder.configure(movie);
-                displayMovieImage(movie.backdropPath, ((HighRatingViewHolder) holder).ivImage);
+
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    displayMovieImage(movie.backdropPathLandscape, ((HighRatingViewHolder) holder).ivImage, R.drawable.placeholder_landscape);
+                } else {
+                    displayMovieImage(movie.backdropPath, ((HighRatingViewHolder) holder).ivImage, R.drawable.placeholder);
+                }
+
                 break;
 
             default:
                 DefaultViewHolder defaultViewHolder = (DefaultViewHolder) holder;
                 defaultViewHolder.configure(movie);
-                displayMovieImage(movie.posterPath, ((DefaultViewHolder) holder).ivImage);
+                displayMovieImage(movie.posterPath, ((DefaultViewHolder) holder).ivImage, R.drawable.placeholder);
                 break;
         }
     }
 
-    private void displayMovieImage(String path, ImageView ivImage) {
+    private void displayMovieImage(String path, ImageView ivImage, int placeholderId) {
 
         Picasso
                 .with(context)
                 .load(path)
-                .placeholder(R.drawable.placeholder)
+                .placeholder(placeholderId)
                 .into(ivImage);
     }
 

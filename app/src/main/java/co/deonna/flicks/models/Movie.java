@@ -40,11 +40,13 @@ public class Movie implements Parcelable {
     private static final String VIDEOS_URL  = "https://api.themoviedb.org/3/movie/%s/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
     public final String URL_BACKDROP = "https://image.tmdb.org/t/p/w780/%s";
+    public final String URL_BACKDROP_LANDSCAPE = "https://image.tmdb.org/t/p/w1280/%s";
     public final String URL_POSTER = "https://image.tmdb.org/t/p/w320/%s";
 
     public String id;
     public String videoId;
     public String backdropPath;
+    public String backdropPathLandscape;
     public String posterPath;
     public String originalTitle;
     public String overview;
@@ -57,6 +59,7 @@ public class Movie implements Parcelable {
         videoId = "";
 
         backdropPath = String.format(URL_BACKDROP, results.getString(KEY_BACKDROP_PATH));
+        backdropPathLandscape = String.format(URL_BACKDROP_LANDSCAPE, results.getString(KEY_BACKDROP_PATH));
         posterPath = String.format(URL_POSTER, results.getString(KEY_POSTER_PATH));
 
         originalTitle = results.getString(KEY_ORIGINAL_TITLE);

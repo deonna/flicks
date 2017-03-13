@@ -42,7 +42,7 @@ Here's a walkthrough of implemented user stories:
 
 <img src='http://i.imgur.com/BaCEEdA.gif' title='Flicks Demo #1' width='' alt='Video Walkthrough' />
 
-[Flicks Demo #1](http://i.imgur.com/BaCEEdA.gif
+[Flicks Demo #1](http://i.imgur.com/BaCEEdA.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

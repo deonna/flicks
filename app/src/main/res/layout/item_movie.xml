@@ -8,8 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardUseCompatPadding="true"
-    card_view:cardBackgroundColor="#E6E6E6"
-    card_view:cardElevation="8dp"
+    card_view:cardBackgroundColor="@color/colorCardView"
+    card_view:cardElevation="@dimen/main_card_elevation"
     >
 
     <RelativeLayout
@@ -22,7 +22,7 @@
             android:id="@+id/flImage"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="8dp">
+            android:layout_marginRight="@dimen/default_movie_right_margin">
 
             <ImageView
                 android:id="@+id/ivImage"
@@ -40,7 +40,7 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/flImage"
             android:layout_toEndOf="@id/flImage"
-            android:padding="8dp">
+            android:padding="@dimen/card_text_margin">
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -50,14 +50,14 @@
                 android:textSize="@dimen/title_text_size_large"
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/adjacent_text_margin"
                 tools:text="@string/titlePlaceholder"/>
 
             <TextView
                 android:id="@+id/tvOverview"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/adjacent_text_margin"
                 android:textSize="@dimen/summary_text_size"
                 android:textAlignment="center"
                 android:layout_below="@+id/tvTitle"

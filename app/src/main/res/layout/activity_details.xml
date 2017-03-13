@@ -4,10 +4,10 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="20dp"
-                android:paddingTop="24dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp">
+                android:paddingLeft="@dimen/detail_padding_left"
+                android:paddingTop="@dimen/detail_padding_top"
+                android:paddingRight="@dimen/detail_padding_right"
+                android:paddingBottom="@dimen/detail_padding_bottom">
 
 
     <TextView
@@ -18,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="@dimen/detail_title_margin_top"
+        android:layout_marginBottom="@dimen/detail_title_margin_bottom"
         android:id="@+id/tvTitle"/>
 
     <ImageView
@@ -50,8 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivImage"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginBottom="@dimen/rating_bar_margin"
+        android:layout_marginTop="@dimen/rating_bar_margin"
         style="?android:attr/ratingBarStyleSmall"
         android:id="@+id/rbStars"/>
 
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvPopularityRating"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="@dimen/detail_popularity_rating_margin_bottom"
         android:layout_below="@+id/tvPopularity"/>
 
     <TextView

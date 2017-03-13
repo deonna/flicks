@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardUseCompatPadding="true"
-    card_view:cardBackgroundColor="#E6E6E6"
+    card_view:cardBackgroundColor="@color/colorCardView"
     card_view:cardCornerRadius="0dp"
     card_view:cardElevation="8dp">
 
@@ -46,9 +46,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp"
+            android:paddingLeft="@dimen/popular_movie_text_padding"
+            android:paddingRight="@dimen/popular_movie_text_padding"
+            android:paddingBottom="@dimen/popular_movie_text_padding"
             android:layout_below="@id/flImage">
 
             <TextView
@@ -82,7 +82,7 @@
                 android:id="@+id/tvOverview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/popular_movie_summary_margin_top"
                 android:textSize="@dimen/summary_text_size"
                 tools:text="@string/summaryPlaceholder"
                 android:layout_below="@+id/tvTitle"/>

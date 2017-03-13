@@ -1,86 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/detail_padding_left"
-                android:paddingTop="@dimen/detail_padding_top"
-                android:paddingRight="@dimen/detail_padding_right"
-                android:paddingBottom="@dimen/detail_padding_bottom">
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/detail_padding_left"
+                    android:paddingTop="@dimen/detail_padding_top"
+                    android:paddingRight="@dimen/detail_padding_right"
+                    android:paddingBottom="@dimen/detail_padding_bottom">
 
 
-    <TextView
-        tools:text="@string/titlePlaceholder"
-        android:textSize="@dimen/title_text_size_huge"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="@dimen/detail_title_margin_top"
-        android:layout_marginBottom="@dimen/detail_title_margin_bottom"
-        android:id="@+id/tvTitle"/>
+        <TextView
+            tools:text="@string/titlePlaceholder"
+            android:textSize="@dimen/title_text_size_huge"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/detail_title_margin_top"
+            android:layout_marginBottom="@dimen/detail_title_margin_bottom"
+            android:id="@+id/tvTitle"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/placeholder"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tvTitle"
-        android:id="@+id/ivImage"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/placeholder"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/tvTitle"
+            android:id="@+id/ivImage"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tvTitle"
-        android:layout_alignTop="@id/ivImage"
-        android:layout_alignBottom="@id/ivImage"
-        android:layout_alignLeft="@id/ivImage"
-        android:layout_alignStart="@id/ivImage"
-        android:layout_alignRight="@id/ivImage"
-        android:layout_alignEnd="@id/ivImage"
-        android:scaleType="centerInside"
-        android:src="@drawable/play_overlay"
-        android:id="@+id/ivPlayOverlay"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/tvTitle"
+            android:layout_alignTop="@id/ivImage"
+            android:layout_alignBottom="@id/ivImage"
+            android:layout_alignLeft="@id/ivImage"
+            android:layout_alignStart="@id/ivImage"
+            android:layout_alignRight="@id/ivImage"
+            android:layout_alignEnd="@id/ivImage"
+            android:scaleType="centerInside"
+            android:src="@drawable/play_overlay"
+            android:id="@+id/ivPlayOverlay"/>
 
-    <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivImage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/rating_bar_margin"
-        android:layout_marginTop="@dimen/rating_bar_margin"
-        style="?android:attr/ratingBarStyleSmall"
-        android:id="@+id/rbStars"/>
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivImage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/rating_bar_margin"
+            android:layout_marginTop="@dimen/rating_bar_margin"
+            style="?android:attr/ratingBarStyleSmall"
+            android:id="@+id/rbStars"/>
 
-    <TextView
-        android:text="@string/popularity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvPopularity"
-        android:textSize="@dimen/summary_text_size"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/rbStars"/>
+        <TextView
+            android:text="@string/popularity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvPopularity"
+            android:textSize="@dimen/summary_text_size"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/rbStars"/>
 
-    <TextView
-        tools:text="@string/popularityRatingPlaceholder"
-        android:textSize="@dimen/summary_text_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvPopularityRating"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/detail_popularity_rating_margin_bottom"
-        android:layout_below="@+id/tvPopularity"/>
+        <TextView
+            tools:text="@string/popularityRatingPlaceholder"
+            android:textSize="@dimen/summary_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvPopularityRating"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/detail_popularity_rating_margin_bottom"
+            android:layout_below="@+id/tvPopularity"/>
 
-    <TextView
-        tools:text="@string/summaryPlaceholder"
-        android:textSize="@dimen/summary_text_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvPopularityRating"
-        android:id="@+id/tvSummary"/>
+        <TextView
+            tools:text="@string/summaryPlaceholder"
+            android:textSize="@dimen/summary_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvPopularityRating"
+            android:id="@+id/tvSummary"/>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

@@ -51,7 +51,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="8dp"
-                tools:text="Fifty Shades Darker"/>
+                tools:text="@string/titlePlaceholder"/>
 
             <TextView
                 android:id="@+id/tvOverview"
@@ -60,7 +60,7 @@
                 android:layout_marginTop="8dp"
                 android:textSize="@dimen/summary_text_size"
                 android:layout_below="@+id/tvTitle"
-                tools:text="When a wounded Christian Grey tries to entice a cautious Ana Steele back into his life, she demands a new arrangement before she will give him another chance. As the two begin to build trust and find stability, shadowy figures from Christian’s past start to circle the couple, determined to destroy their hopes for a future together."/>
+                tools:text="@string/summaryPlaceholder"/>
 
         </RelativeLayout>
     </RelativeLayout>

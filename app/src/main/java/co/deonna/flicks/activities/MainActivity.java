@@ -1,5 +1,6 @@
 package co.deonna.flicks.activities;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +23,6 @@ import butterknife.ButterKnife;
 import co.deonna.flicks.R;
 import co.deonna.flicks.adapters.MoviesAdapter;
 import co.deonna.flicks.models.Movie;
-import cz.msebera.android.httpclient.Header;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String KEY_RESULTS = "results";
     private static final String URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+
+    public static Typeface fontRegular;
+    public static Typeface fontLight;
 
     private List<Movie> movies;
     private MoviesAdapter moviesAdapter;
@@ -49,41 +52,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        fontRegular = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+        fontLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
+
         movies =  new ArrayList<>();
         moviesAdapter = new MoviesAdapter(this, movies);
 
         rvMovies.setAdapter(moviesAdapter);
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
 
-//        makeAsyncHttpRequest();
         makeMoviesApiRequest();
-//        AsyncHttpClient client = new AsyncHttpClient();
-//
-//        client.get(URL, new JsonHttpResponseHandler() {
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//
-//                JSONArray movieJsonResults;
-//
-//                try {
-//
-//                    movieJsonResults = response.getJSONArray(KEY_RESULTS);
-//                    movies.addAll(Movie.fromJsonArray(movieJsonResults));
-//                    moviesAdapter.notifyDataSetChanged();
-//                } catch (JSONException e) {
-//
-//                    e.printStackTrace();
-//                    Log.e(TAG, "Exception reading JSON from API" + e.toString());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//
-//                super.onFailure(statusCode, headers, responseString, throwable);
-//            }
-//        });
     }
 
     private void makeMoviesApiRequest() {
@@ -133,35 +111,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-//    private void makeAsyncHttpRequest() {
-//
-//        AsyncHttpClient client = new AsyncHttpClient();
-//
-//        client.get(URL, new JsonHttpResponseHandler() {
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//
-//                JSONArray movieJsonResults;
-//
-//                try {
-//
-//                    movieJsonResults = response.getJSONArray(KEY_RESULTS);
-//                    movies.addAll(Movie.fromJsonArray(movieJsonResults));
-//                    moviesAdapter.notifyDataSetChanged();
-//                } catch (JSONException e) {
-//
-//                    e.printStackTrace();
-//                    Log.e(TAG, "Exception reading JSON from API" + e.toString());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//
-//                super.onFailure(statusCode, headers, responseString, throwable);
-//            }
-//        });
-//    }
 }

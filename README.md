@@ -50,7 +50,7 @@ Describe any challenges encountered while building the app.
 - Using the `RatingBar` was a bit unintuitive. If the width leaves enough space for more than the maximum number of stars, then it will show all those stars, regardless of what number you set for the max (at least, that's what I encountered). Took some StackOverflow perusing before confirming this was the default behavior, and that I had to use `wrap_content` for the behavior that seems like it should be the default.
 - I experienced lots of problems with the build not being able to resolve `AppCompat` and `CardView`. It turned out to be a bug in Gradle, and I ended up having to downgrade.
 - I witnessed first-hand the terrible consequences of forgetting a field in a Parcelable…
-- Adding the `YouTubeAndroidPlayerApi.jar` felt incredibly hack-y and was very time-consuming. It's unfortunate that the Android emulator is so much less performant than Genymotion's. When useful APIs like this are released, relying on a third-party emulator is a big drawback. 
+- Adding the `YouTubeAndroidPlayerApi.jar` felt incredibly hack-y and was very time-consuming. It's unfortunate that the Android emulator is so much less performant than Genymotion's. When useful APIs like this are released, relying on a third-party emulator is a big drawback.
 
 
 

@@ -2,6 +2,7 @@ package co.deonna.flicks.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.deonna.flicks.R;
 import co.deonna.flicks.activities.DetailsActivity;
+import co.deonna.flicks.activities.MainActivity;
 import co.deonna.flicks.activities.PlayTrailerActivity;
 import co.deonna.flicks.models.Movie;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
@@ -108,7 +110,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 .with(context)
                 .load(path)
                 .placeholder(R.drawable.placeholder)
-                .transform(new RoundedCornersTransformation(ROUNDED_CORNER_RADIUS, ROUNDED_CORNER_RADIUS))
                 .into(ivImage);
     }
 
@@ -136,8 +137,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         public void configure(Movie movie) {
 
-            this.tvTitle.setText(movie.originalTitle);
-            this.tvOverview.setText(movie.overview);
+            tvTitle.setTypeface(MainActivity.fontRegular);
+            tvTitle.setText(movie.originalTitle);
+
+            tvOverview.setTypeface(MainActivity.fontLight);
+            tvOverview.setText(movie.overview);
 
             currentMovie = movie;
         }
@@ -161,6 +165,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @BindView(R.id.cvMovie) CardView cvMovie;
         @Nullable @BindView(R.id.ivImage) ImageView ivImage;
         @BindView(R.id.tvTitle) TextView tvTitle;
+        @BindView(R.id.tvNumStars) TextView tvNumStars;
         @BindView(R.id.tvOverview) TextView tvOverview;
 
         public HighRatingViewHolder(View itemView) {
@@ -171,7 +176,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         public void configure(Movie movie) {
 
+            tvTitle.setTypeface(MainActivity.fontRegular);
             tvTitle.setText(movie.originalTitle);
+
+            tvNumStars.setTypeface(MainActivity.fontRegular);
+            tvNumStars.setText(Float.toString(movie.getRating()));
+
+            tvOverview.setTypeface(MainActivity.fontLight);
             tvOverview.setText(movie.overview);
 
             currentMovie = movie;

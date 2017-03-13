@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.deonna.flicks.activities.MainActivity;
+import co.deonna.flicks.network.MovieDbClient;
 import cz.msebera.android.httpclient.Header;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -36,8 +37,6 @@ public class Movie implements Parcelable {
     public static final String KEY_VOTE_AVERAGE = "vote_average";
     public static final String KEY_POPULARITY= "popularity";
     public static final String KEY_MOVIE = "movie";
-
-    private static final String VIDEOS_URL  = "https://api.themoviedb.org/3/movie/%s/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
     public final String URL_BACKDROP = "https://image.tmdb.org/t/p/w780/%s";
     public final String URL_BACKDROP_LANDSCAPE = "https://image.tmdb.org/t/p/w1280/%s";
@@ -103,15 +102,9 @@ public class Movie implements Parcelable {
 
     private void makeVideosRequest() {
 
-        OkHttpClient client = new OkHttpClient();
+        MovieDbClient client = new MovieDbClient();
 
-        String url = String.format(VIDEOS_URL, id);
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
+        client.getVideoForMovie(id, new Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {
@@ -195,5 +188,4 @@ public class Movie implements Parcelable {
             return new Movie[size];
         }
     };
-
 }
